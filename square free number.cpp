@@ -1,0 +1,111 @@
+// SQUARE FREE NUMBER
+#include<iostream>
+using namespace std;
+int a[10];
+long long afun(long long x,long long n)
+{
+	return (n/x);
+}
+int main()
+{
+	long long b[7]={0,2,3,5,7,11,13};
+	long long n,i,j,k,l,m,count;
+	cin>>n;
+	if(n%2==0)
+	{
+		a[1]++;
+	}
+	if(n%3==0)
+	{
+		a[2]++;
+	}
+	if(n%5==0)
+	{
+		a[3]++;
+	}
+	if(n%7==0)
+	{
+		a[4]++;
+	}
+	if(n%11==0)
+	{
+		a[5]++;
+	}
+	if(n%13==0)
+	{
+		a[6]++;
+	}
+	count=n;
+	for(i=1;i<=6;i++)
+	{
+		if(a[i])
+		{
+			count-=afun(b[i],n);
+		}
+	}
+	for(i=1;i<=5;i++)
+	{
+		for(j=i+1;j<=6;j++)
+		{
+			if((a[i]*a[j]))
+			{
+				count+=afun((b[i]*b[j]),n);
+			}
+		}
+	}
+	for(i=1;i<=4;i++)
+	{
+		for(j=i+1;j<=5;j++)
+		{
+			for(k=j+1;k<=6;k++)
+			{
+				if((a[i]*a[j]*a[k]))
+				{
+					count-=afun((b[i]*b[j]*b[k]),n);
+				}
+			}
+		}
+	}
+	for(i=1;i<=3;i++)
+	{
+		for(j=i+1;j<=4;j++)
+		{
+			for(k=j+1;k<=5;k++)
+			{
+				for(l=k+1;l<=6;l++)
+				{
+					if((a[i]*a[j]*a[k]*a[l]))
+					{
+						count+=afun((b[i]*b[j]*b[k]*b[l]),n);
+					}
+				}
+			}
+		}
+	}
+	for(i=1;i<=2;i++)
+	{
+		for(j=i+1;j<=3;j++)
+		{
+			for(k=j+1;k<=4;k++)
+			{
+				for(l=k+1;l<=5;l++)
+				{
+					for(m=l+1;m<=6;m++)
+					{
+						if((a[i]*a[j]*a[k]*a[l]*a[m]))
+						{
+							count-=afun((b[i]*b[j]*b[k]*b[l]*b[m]),n);
+						}
+					}
+				}
+			}
+		}
+	}
+	if(a[1]*a[2]*a[3]*a[4]*a[5]*a[6])
+	{
+		count+=afun((b[1]*b[2]*b[3]*b[4]*b[5]*b[6]),n);
+	}
+	cout<<count;
+	return 0;
+}
+
